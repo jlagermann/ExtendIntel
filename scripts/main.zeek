@@ -1,4 +1,4 @@
-module ExtendIntel;
+module Intel;
 
 export {
   redef record Intel::MetaData +={
