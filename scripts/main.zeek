@@ -1,5 +1,3 @@
-@load base/frameworks/intel
-
 module ExtendIntel;
 
 export {
