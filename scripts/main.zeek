@@ -19,3 +19,12 @@ export {
     category: string &optional &log;
   };
 }
+
+hook extend_match(info: Info, s: Seen, items: set[Item]) &priority=5
+	{
+	for ( item in items )
+		{
+		if ( item$meta?$desc )
+			info$desc = item$meta$desc;
+		}
+	}
