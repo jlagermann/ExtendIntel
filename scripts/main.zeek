@@ -9,5 +9,5 @@ export {
     lastseen: string &optional &log;
     associated: string &optional &log;
     category: string &optional &log;
-  }
+  };
 }
