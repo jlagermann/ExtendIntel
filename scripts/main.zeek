@@ -7,6 +7,8 @@ export {
     lastseen: string &optional;
     associated: string &optional;
     category: string &optional;
+    campaigns: string &optional;
+    reports: string &optional;
   };
 
   redef record Info += {
@@ -17,6 +19,8 @@ export {
     lastseen: string &optional &log;
     associated: string &optional &log;
     category: string &optional &log;
+    campaigns: string &optional &log;
+    reports: string &optional &log;
   };
 }
 
@@ -38,5 +42,9 @@ hook extend_match(info: Info, s: Seen, items: set[Item]) &priority=5
 			info$associated = item$meta$associated;
     if ( item$meta?$category )
 			info$category = item$meta$category;
+    if ( item$meta?$campaigns )
+			info$campaigns = item$meta$campaigns;
+    if ( item$meta?$reports)
+			info$reports = item$meta$reports;
 		}
 	}
