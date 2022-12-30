@@ -18,33 +18,33 @@ export {
     firstseen: string &optional &log;
     lastseen: string &optional &log;
     associated: string &optional &log;
-    category: string &optional &log;
-    campaigns: string &optional &log;
-    reports: string &optional &log;
+    category: set[string] &optional &log &default=string_set();
+    campaigns: set[string] &optional &log &default=string_set();
+    reports: set[string] &optional &log &default=string_set();
   };
 }
 
 hook extend_match(info: Info, s: Seen, items: set[Item]) &priority=5
-	{
-	for ( item in items )
-		{
-		if ( item$meta?$desc )
-			info$desc = item$meta$desc;
-      if ( item$meta?$url )
-			info$url = item$meta$url;
-		if ( item$meta?$confidence )
-			info$confidence = item$meta$confidence;
-		if ( item$meta?$firstseen )
-			info$firstseen = item$meta$firstseen;
-		if ( item$meta?$lastseen )
-			info$lastseen = item$meta$lastseen;
+  {
+  for ( item in items )
+    {
+    if ( item$meta?$desc )
+      info$desc = item$meta$desc;
+    if ( item$meta?$url )
+      info$url = item$meta$url;
+    if ( item$meta?$confidence )
+      info$confidence = item$meta$confidence;
+    if ( item$meta?$firstseen )
+      info$firstseen = item$meta$firstseen;
+    if ( item$meta?$lastseen )
+      info$lastseen = item$meta$lastseen;
     if ( item$meta?$associated )
-			info$associated = item$meta$associated;
+      info$associated = item$meta$associated;
     if ( item$meta?$category )
-			info$category = item$meta$category;
+      add info$category[item$meta$category];
     if ( item$meta?$campaigns )
-			info$campaigns = item$meta$campaigns;
+      add info$campaigns[item$meta$campaigns];
     if ( item$meta?$reports)
-			info$reports = item$meta$reports;
-		}
-	}
+      add info$reports[item$meta$reports];
+    }
+  }
